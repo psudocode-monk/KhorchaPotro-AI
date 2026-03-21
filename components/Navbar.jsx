@@ -38,6 +38,9 @@ export default function Navbar() {
                 <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
                   Dashboard
                 </Link>
+                <Link href="/currency-converter" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
+                  Currency Converter
+                </Link>
                 {/* <Link href="/stocks" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
                   Check Live Stock
                 </Link> */}
@@ -60,7 +63,7 @@ export default function Navbar() {
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          className="absolute right-0 mt-3 w-64 bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-gray-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 z-50 overflow-hidden"
+                          className="absolute right-0 mt-3 w-64 bg-white/95 dark:bg-black/95 backdrop-blur-2xl border border-gray-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 z-50 overflow-hidden"
                         >
                           {/* User Info */}
                           <div className="flex items-center space-x-3 p-2 mb-4 border-b border-gray-100 dark:border-white/5 pb-4">
@@ -165,6 +168,13 @@ export default function Navbar() {
                     className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
                   >
                     Dashboard
+                  </Link>
+                  <Link
+                    href="/currency-converter"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
+                  >
+                    Currency Converter
                   </Link>
                   <Link
                     href="/profile"
