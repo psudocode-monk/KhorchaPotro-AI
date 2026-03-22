@@ -1,109 +1,96 @@
-# 💰 KhorchaPotro AI
+# 💰 Intellisense
 
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16+-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Gemini AI](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=google%20gemini&logoColor=white)
 
-**The Smartest Way to Track Your Expenses 🚀**
-
-*Powered by Google Gemini AI for intelligent financial insights.*
-
-[Report Bug](https://github.com/yourusername/ai-bangali-tracker/issues) · [Request Feature](https://github.com/yourusername/ai-bangali-tracker/issues)
+### 🚀 The Smarter Way to Track Expenses & Build Wealth
+*Powered by Google Gemini AI for continuous financial diagnostics and intelligent advisory workflows.*
 
 </div>
 
 ---
 
-## 📖 Overview
+## 📖 Project Overview
 
-**KhorchaPotro AI** is a modern, AI-powered expense tracking application designed to help you manage your finances with ease. Beyond simple logging, it leverages **Google's Gemini AI** to provide smart insights, categorize your spending automatically, and offer personalized financial advice in Bengali (and English).
+**Intellisense** is a premium Next-Generation financial dashboard engineered to help users master their expenses, income streams, and wealth growth through data symmetry and **Artificial Intelligence**. 
 
-Built with the latest web technologies, it offers a seamless, responsive, and beautiful user experience.
+Unlike conventional manual tables, **Intellisense** leverages **Google Gemini Flash LLM** architectures to interpret transactional graphs dynamically—offering smart budgeting, behavior reports, and accessible chatbot guidance natively inside the environment.
 
-## ✨ Key Features
+---
 
-- **🤖 AI-Powered Analysis**: Get smart summaries and budget advice directly from your expense data.
-- **📊 Interactive Dashboard**: Visualize your spending habits with dynamic charts and graphs.
-- **📝 Easy Logging**: Quick and intuitive interface for adding daily expenses.
-- **🔐 Secure Authentication**: Robust user security powered by NextAuth.js.
-- **📱 Fully Responsive**: Works perfectly on mobile, tablet, and desktop devices.
-- **🌙 Dark Mode Ready**: Easy on the eyes with a modern UI design.
+## 🌟 Advanced Feature Roadmap
 
-## 🛠️ Tech Stack
+### 📊 1. Analytical Core Dashboard
+* **Dynamic Auditing**: Quick injection widgets for immediate Expense and Income reconcile.
+- **Interactive Visualizers**: High-grade components utilizing `Recharts` and `Framer Motion` tracing financial velocities via visual cash-flow tables.
+- **Behavior Categorizer**: Contextual triggers framing aggregation for high-waste breakouts.
 
-This project is built using a robust modern stack:
+### 🤖 2. Google Gemini AI Center
+- **Total Portfolio Diagnostics (`Dashboard AI`)**: Performs automated runs against data templates giving direct feedback summarizing net-balance health.
+- **Context-Seeded Chatbot (`IntelliSpend Chat`)**: Full chat node that carries local workspace aggregates for real-world contextual problem solving.
+- **Multi-lingual Frame support**: Sub-node templates offering diagnostic triggers in **English** & **Hindi** support modules.
 
-- **Frontend**: [Next.js 16](https://nextjs.org/), [React 19](https://react.dev/), [Tailwind CSS 4](https://tailwindcss.com/)
-- **Backend API**: Next.js Server Actions & API Routes
-- **Database**: [MongoDB](https://www.mongodb.com/) (via Mongoose)
-- **AI Integration**: [Google Generative AI SDK](https://ai.google.dev/docs)
-- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+### 💱 3. Unified FinTech Sub-modules
+- **Live Currency Interface**: Interactive Live forwards across Top global-regional corridors (USD -> BDT -> INR) using live open-Exchange data API node forwards with live disclaimer widgets.
+- **Aggregated Financial Bulletins**: Card-based live desk layout aggregating relative updates referencing financial news boards for broad asset overview support.
+- **Stock Simulator Sandbox Node**: Local trading module interface preparing interactive graphical analytics simulating asset flow setup parameters.
 
-## 🚀 Getting Started
+---
 
-Follow these steps to get a local copy up and running.
+## 🛠️ Unified System Stack
 
-### Prerequisites
+| Component | Technology | Role |
+| :--- | :--- | :--- |
+| **Frontend Framework** | `Next.js 16` (App Router) | Core Server Layouts & API node structure |
+| **Logic Layer** | `React 19` | Async data forward hooks and widget rendering |
+| **Styles** | `Tailwind CSS 4` | Deep-level premium dashboard visual variables |
+| **Animation Deck** | `Framer-Motion` | Ultra-smooth visual transitions scaling modal cards |
+| **AI Node Interface** | `@google/generative-ai` | `gemini-flash-latest` endpoint setups |
+| **Database/Backing** | `MongoDB` (Mongoose) | Stable schema structure tracking absolute transactions |
+| **Secure Node Handlers** | `NextAuth.js` | Full JWT route encryption securing sensitive aggregate nodes |
 
-- Node.js (v18 or higher)
-- MongoDB Database URI
-- Google Gemini API Key
+---
 
-### Installation
+## 🚀 Workspace Checklist & Installation
 
-1. **Clone the repository**
+### 📋 Prerequisites
+- **Framework**: `Node.js` (v18.0.0+)
+- **Core Connections**: MongoDB cluster URI
+- **Intelligence**: Google Gemini API key mapped properly for execution triggers
+
+### 🏁 Deploy Prep (Local)
+
+1. **Pull and Traverse Repository Setup**
    ```bash
    git clone https://github.com/yourusername/ai-bangali-tracker.git
    cd ai-bangali-tracker
    ```
 
-2. **Install dependencies**
+2. **Run Module Operations Setup**
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
-3. **Configure Environment Variables**
-   Create a `.env.local` file in the root directory and add the following:
-
+3. **Establish Local Frame Configuration (`.env.local`)**
    ```env
    MONGODB_URI=your_mongodb_connection_string
-   GOOGLE_API_KEY=your_gemini_api_key
+   GEMINI_API_KEY=your_gemini_api_key
    NEXTAUTH_SECRET=your_nextauth_secret_key
    NEXTAUTH_URL=http://localhost:3000
    ```
 
-4. **Run the development server**
+4. **Boot Development Loop Forwarder**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the app in action.
-
-## 🤝 Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
 ---
 
 <div align="center">
-Made with ❤️ by [Avishek Sadhukhan]
+  <sub>Made with ❤️ by Avishek Sadhukhan</sub>
 </div>
