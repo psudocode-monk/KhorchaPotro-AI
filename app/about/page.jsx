@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Ear, TrendingUp, BarChart3, Database, ShieldCheck, Zap } from 'lucide-react';
 
-const BACKGROUND_TEXT = "IntelliSense - India's First Bi-Lingual AI Powered Expense Tracker • ";
+const BACKGROUND_TEXT = "IntelliSpend - India's First Bi-Lingual AI Powered Expense Tracker • ";
 
 const FEATURES = [
   {
@@ -102,7 +102,7 @@ export default function About() {
              The Future of Personal Finance
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
-            Meet <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500 animate-gradient-x">IntelliSense</span>
+            Meet <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500 animate-gradient-x">IntelliSpend</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
             Managing finances shouldn't be a chore. It should be an <strong className="text-emerald-500">experience</strong>. We combined the power of Google Gemini with bi-lingua AI support to actively grow your wealth.
