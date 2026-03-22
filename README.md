@@ -1,4 +1,4 @@
-# 💰 Intellisense
+# 💰 IntelliSpend
 
 <div align="center">
 
@@ -17,9 +17,9 @@
 
 ## 📖 Project Overview
 
-**Intellisense** is a premium Next-Generation financial dashboard engineered to help users master their expenses, income streams, and wealth growth through data symmetry and **Artificial Intelligence**. 
+**IntelliSpend** is a premium Next-Generation financial dashboard engineered to help users master their expenses, income streams, and wealth growth through data symmetry and **Artificial Intelligence**. 
 
-Unlike conventional manual tables, **Intellisense** leverages **Google Gemini Flash LLM** architectures to interpret transactional graphs dynamically—offering smart budgeting, behavior reports, and accessible chatbot guidance natively inside the environment.
+Unlike conventional manual tables, **IntelliSpend** leverages **Google Gemini Flash LLM** architectures to interpret transactional graphs dynamically—offering smart budgeting, behavior reports, and accessible chatbot guidance natively inside the environment.
 
 ---
 
