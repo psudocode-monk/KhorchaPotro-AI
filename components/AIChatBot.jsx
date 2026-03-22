@@ -15,7 +15,7 @@ export default function AIChatBot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hi! I am your KhorchaPotro AI assistant. How can I help you with your finances today?'
+      content: 'Hi! I am your IntelliSpend assistant. How can I help you with your finances today?'
     }
   ]);
 
@@ -33,11 +33,17 @@ export default function AIChatBot() {
     scrollToBottom();
   }, [messages, isOpen]);
 
-  const isAuthPage = pathname === '/login' || pathname === '/register' || pathname === '/forgot-password' || pathname.startsWith('/reset-password/');
+  const isExcludedPage = 
+    pathname === '/' || 
+    pathname === '/login' || 
+    pathname === '/register' || 
+    pathname === '/forgot-password' || 
+    pathname.startsWith('/reset-password/') || 
+    pathname.startsWith('/stocks');
 
   // Periodic tooltip logic (every 20 seconds)
   useEffect(() => {
-    if (isAuthPage) return;
+    if (isExcludedPage) return;
 
     const tooltipInterval = setInterval(() => {
       if (!isOpen) {
@@ -49,10 +55,10 @@ export default function AIChatBot() {
     }, 20000);
 
     return () => clearInterval(tooltipInterval);
-  }, [isOpen, playNotificationSound, pathname, isAuthPage]);
+  }, [isOpen, playNotificationSound, pathname, isExcludedPage]);
 
-  // Hide the chatbot entirely on Auth pages
-  if (isAuthPage) {
+  // Hide the chatbot entirely on excluded pages
+  if (isExcludedPage) {
     return null;
   }
 
@@ -126,7 +132,7 @@ export default function AIChatBot() {
                     <Bot className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">KhorchaPotro AI</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">IntelliSpend</h3>
                     <p className="text-xs text-emerald-400 flex items-center gap-1">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                       Online

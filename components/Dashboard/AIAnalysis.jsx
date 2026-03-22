@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkles, RefreshCw } from 'lucide-react';
+import { Sparkles, RefreshCw, Languages } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,15 +12,16 @@ export default function AIAnalysis({ expenses, incomes }) {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [language, setLanguage] = useState('en');
 
-  const handleAnalyze = async () => {
+  const handleAnalyzeWithLang = async (lang = language) => {
     setLoading(true);
     setError(null);
     try {
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ expenses, incomes }),
+        body: JSON.stringify({ expenses, incomes, language: lang }),
       });
       
       const data = await res.json();
@@ -38,33 +39,56 @@ export default function AIAnalysis({ expenses, incomes }) {
     }
   };
 
+  const toggleLanguage = () => {
+    const newLang = language === 'en' ? 'hi' : 'en';
+    setLanguage(newLang);
+    handleAnalyzeWithLang(newLang);
+  };
+
   return (
     <div className="bg-gradient-to-br from-emerald-50/50 to-cyan-50/50 dark:from-emerald-900/20 dark:to-cyan-900/20 shadow-sm border border-emerald-900/10 dark:border-emerald-500/20 rounded-2xl p-6 mb-8 relative overflow-hidden">
-      <div className="flex items-center justify-between mb-4 relative z-10">
-        <div className="flex items-center space-x-2">
-          <div className="p-2 bg-emerald-100 dark:bg-emerald-500/20 rounded-lg">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 relative z-10">
+        <div className="flex items-center space-x-3 shrink-0">
+          <div className="p-2 bg-emerald-100 dark:bg-emerald-500/20 rounded-lg shrink-0">
             <Sparkles className="text-emerald-600 dark:text-emerald-400 w-5 h-5" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI Financial Advisor</h3>
         </div>
-        <Button  
-          onClick={handleAnalyze} 
-          loading={loading}
-          variant="primary"
-          className="shadow-emerald-500/20"
-        >
-          {analysis ? (
-            <>
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              <span>Refresh Analysis</span>
-            </>
-          ) : (
-            <>
-              <Sparkles className="w-4 h-4" />
-              <span>Analyze My Spending</span>
-            </>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+          {analysis && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full sm:w-auto">
+              <Button
+                onClick={toggleLanguage}
+                variant="outline"
+                className="w-full sm:w-auto text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border-gray-200 dark:border-white/10"
+                disabled={loading}
+              >
+                <Languages className="w-4 h-4 mr-2 shrink-0" />
+                <span className="truncate">{language === 'en' ? 'Toggle to Hindi' : 'Toggle to English'}</span>
+              </Button>
+            </motion.div>
           )}
-        </Button>
+          <div className="w-full sm:w-auto">
+            <Button  
+              onClick={() => handleAnalyzeWithLang(language)} 
+              loading={loading}
+              variant="primary"
+              className="w-full sm:w-auto shadow-emerald-500/20"
+            >
+              {analysis ? (
+                <>
+                  <RefreshCw className={`w-4 h-4 shrink-0 ${loading ? 'animate-spin' : ''}`} />
+                  <span className="truncate">Refresh Analysis</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4 shrink-0" />
+                  <span className="truncate">Analyze My Spending</span>
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
       </div>
 
       <AnimatePresence mode="wait">

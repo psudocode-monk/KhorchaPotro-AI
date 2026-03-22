@@ -71,12 +71,12 @@ export async function POST(req) {
     });
 
     const mailOptions = {
-      from: `"KhorchaPotro AI" <${process.env.EMAIL_USER}>`,
+      from: `"IntelliSpend" <${process.env.EMAIL_USER}>`,
       to: user.email,
       subject: 'Password Reset Request',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
-            <h2 style="color: #10B981; text-align: center;">KhorchaPotro AI</h2>
+            <h2 style="color: #10B981; text-align: center;">IntelliSpend</h2>
             <p>You requested a password reset. Please click the button below to set a new password:</p>
             <div style="text-align: center; margin: 30px 0;">
                 <a href="${resetUrl}" style="background-color: #10B981; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold;">Reset Password</a>

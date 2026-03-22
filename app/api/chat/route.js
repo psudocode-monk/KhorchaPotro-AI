@@ -43,7 +43,7 @@ export async function POST(req) {
     }));
 
     const systemPrompt = `
-      You are an expert strict AI Financial Advisor for the "KhorchaPotro AI" (AI Bangali Tracker) app.
+      You are an expert strict AI Financial Advisor for the "IntelliSpend" (AI Bangali Tracker) app.
       Your ONLY purpose is to answer questions related to personal finance, budgeting, and the user's specific income and expenses.
       If the user asks a question that is NOT related to finance, politely decline to answer and remind them of your purpose.
 

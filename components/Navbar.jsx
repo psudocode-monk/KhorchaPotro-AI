@@ -6,12 +6,54 @@ import { useState, useRef, useEffect } from 'react';
 import { Menu, X, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ui/ThemeToggle';
+import { useTheme } from 'next-themes';
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef(null);
+  const { theme, setTheme } = useTheme();
+
+  const handleRowThemeToggle = (event) => {
+    // Prevent double toggle if they click directly on the inner button
+    if (event.target.closest('button[aria-label="Toggle Theme"]')) return;
+
+    const isDark = theme === 'dark';
+    const isAppearanceTransition = document.startViewTransition &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!isAppearanceTransition) {
+      setTheme(isDark ? 'light' : 'dark');
+      return;
+    }
+
+    const x = event.clientX;
+    const y = event.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      setTheme(isDark ? 'light' : 'dark');
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+      document.documentElement.animate(
+        { clipPath: isDark ? [...clipPath].reverse() : clipPath },
+        {
+          duration: 500,
+          easing: 'ease-in-out',
+          pseudoElement: isDark ? '::view-transition-old(root)' : '::view-transition-new(root)',
+        }
+      );
+    });
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -29,7 +71,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-cyan-500 dark:from-emerald-400 dark:to-cyan-400">
-              KhorchaPotro AI
+              IntelliSpend
             </span>
           </Link>
           <div className="hidden md:flex items-center space-x-8">
@@ -38,15 +80,29 @@ export default function Navbar() {
                 <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
                   Dashboard
                 </Link>
-                <Link href="/currency-converter" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
-                  Currency Converter
+                <Link href="/about" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
+                  About
                 </Link>
-                {/* <Link href="/stocks" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
-                  Check Live Stock
-                </Link> */}
-                <Link href="/news" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
-                  Finance News
-                </Link>
+                
+                <div className="relative group">
+                  <button className="flex items-center space-x-1 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors focus:outline-none">
+                    <span>Services</span>
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </button>
+                  <div className="absolute left-0 mt-2 w-48 rounded-xl shadow-lg bg-white dark:bg-black/95 border border-gray-200 dark:border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden backdrop-blur-2xl">
+                    <div className="py-2">
+                      <Link href="/stocks" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
+                        IntelliSpend Stock Playground
+                      </Link>
+                      <Link href="/currency-converter" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
+                        Currency Converter
+                      </Link>
+                      <Link href="/news" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
+                        Finance News
+                      </Link>
+                    </div>
+                  </div>
+                </div>
                 
                 <div className="relative" ref={profileRef}>
                   <button
@@ -90,9 +146,9 @@ export default function Navbar() {
                               </Link>
 
                               {/* Theme Toggle - Correctly Aligned */}
-                              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors group cursor-pointer" onClick={() => {}}>
-                                <div className="flex items-center space-x-3">
-                                  <div className="w-8 h-8 flex items-center justify-center shrink-0">
+                              <div className="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors group cursor-pointer" onClick={handleRowThemeToggle}>
+                                <div className="flex items-center space-x-3 pointer-events-none">
+                                  <div className="w-8 h-8 flex items-center justify-center shrink-0 pointer-events-auto">
                                     <ThemeToggle />
                                   </div>
                                   <span className="text-sm font-medium">Change Theme</span>
@@ -118,8 +174,11 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex items-center space-x-4">
+                <Link href="/" className="hidden sm:block text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors font-medium">
+                  Home
+                </Link>
                 <ThemeToggle />
-                <Link href="/login" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors">
+                <Link href="/login" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors font-medium">
                   Login
                 </Link>
                 <Link
@@ -170,37 +229,52 @@ export default function Navbar() {
                     Dashboard
                   </Link>
                   <Link
-                    href="/currency-converter"
+                    href="/about"
                     onClick={() => setIsOpen(false)}
                     className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
+                  >
+                    About
+                  </Link>
+                  <div className="block px-3 py-2 text-sm font-semibold text-gray-400 uppercase tracking-wider mt-2">
+                    Services
+                  </div>
+                  <Link
+                    href="/stocks"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 ml-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
+                  >
+                    IntelliSpend Stock Playground
+                  </Link>
+                  <Link
+                    href="/currency-converter"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 ml-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
                   >
                     Currency Converter
                   </Link>
                   <Link
-                    href="/profile"
+                    href="/news"
                     onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
-                  >
-                    My Profile
-                  </Link>
-                  <Link
-                    href="/stocks"
-                    onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
-                  >
-                    Check Live Stock
-                  </Link>
-                  <Link
-                    href="/news" as="/news"
-                    onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
+                    className="block px-3 py-2 ml-4 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl"
                   >
                     Finance News
                   </Link>
-                  <div className="px-3 py-2 border-t border-gray-100 dark:border-white/10 mt-2">
-                    <div className="flex items-center justify-between">
+                  <Link
+                    href="/profile"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-500/10 rounded-xl mt-2"
+                  >
+                    My Profile
+                  </Link>
+                  <div 
+                    className="px-3 py-2 border-t border-gray-100 dark:border-white/10 mt-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-white/5 transition-colors rounded-xl"
+                    onClick={handleRowThemeToggle}
+                  >
+                    <div className="flex items-center justify-between pointer-events-none">
                       <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Theme</span>
-                      <ThemeToggle />
+                      <div className="pointer-events-auto">
+                        <ThemeToggle />
+                      </div>
                     </div>
                   </div>
                   <button
@@ -214,9 +288,16 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link
+                    href="/"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 font-medium"
+                  >
+                    Home
+                  </Link>
+                  <Link
                     href="/login"
                     onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 text-gray-600 dark:text-gray-300"
+                    className="block px-3 py-2 text-gray-600 dark:text-gray-300 font-medium"
                   >
                     Login
                   </Link>

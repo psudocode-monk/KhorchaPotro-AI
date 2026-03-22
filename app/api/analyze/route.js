@@ -11,7 +11,7 @@ export async function POST(req) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const { expenses, incomes } = await req.json();
+    const { expenses, incomes, language = 'en' } = await req.json();
 
     if ((!expenses || expenses.length === 0) && (!incomes || incomes.length === 0)) {
       return NextResponse.json(
@@ -51,24 +51,30 @@ export async function POST(req) {
 
     const combinedData = [...expenseSummary, ...incomeSummary].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    const isHindi = language === 'hi';
+    const langInstructions = isHindi 
+      ? `The entire response MUST be written consistently in proper formal Hindi (देवनागरी लिपि). Use markdown formatting.`
+      : `The entire response MUST be written in English.`;
+
     const prompt = `
       Act as a financial advisor. Analyze the following financial records (Expenses and Incomes):
       ${JSON.stringify(combinedData)}
 
       Provide a concise but insightful analysis in the following markdown format:
-      ## 📊 Financial Summary
+      ## 📊 ${isHindi ? 'वित्तीय सारांश (Financial Summary)' : 'Financial Summary'}
       (Total Income, Total Expense, Savings Rate, Net Balance)
 
-      ## 🚨 Wasteful Patterns
+      ## 🚨 ${isHindi ? 'फिजूलखर्ची के पैटर्न (Wasteful Patterns)' : 'Wasteful Patterns'}
       (Identify any concerning spending habits)
 
-      ## 💰 Income Analysis
+      ## 💰 ${isHindi ? 'आय विश्लेषण (Income Analysis)' : 'Income Analysis'}
       (Comments on income streams and stability)
 
-      ## 💡 Recommendations
+      ## 💡 ${isHindi ? 'सुझाव (Recommendations)' : 'Recommendations'}
       (Actionable advice to save money and increase wealth)
 
       Keep the tone professional yet encouraging. Focus on actionable insights.
+      ${langInstructions}
     `;
 
     const result = await modelInstance.generateContent(prompt);

@@ -7,7 +7,7 @@ import AIChatBot from '@/components/AIChatBot';
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'KhorchaPotro AI - AI Powered Expense Tracker',
+  title: 'IntelliSpend - AI Powered Expense Tracker',
   description: 'Smart expense tracking powered by AI',
 };
 
