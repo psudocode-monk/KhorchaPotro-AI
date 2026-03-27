@@ -67,7 +67,7 @@ Unlike conventional manual tables, **IntelliSpend** leverages **Google Gemini Fl
 
 1. **Pull and Traverse Repository Setup**
    ```bash
-   git clone https://github.com/yourusername/ai-bangali-tracker.git
+   git clone https://github.com/yourusername/IntelliSpend.git
    cd ai-bangali-tracker
    ```
 
